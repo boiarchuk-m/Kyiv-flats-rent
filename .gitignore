@@ -1,2 +1,4 @@
 .ipynb_checkpoints/
+.idea/
 flats.csv
+flats_cleaned.csv
