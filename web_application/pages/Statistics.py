@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-#PATH_DATA = "../flats_cleaned.csv"
 PATH_DATA = "flats_cleaned.csv"
 
 @st.cache_data

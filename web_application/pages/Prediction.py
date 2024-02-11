@@ -5,10 +5,8 @@ import numpy as np
 
 
 st.set_page_config(
-    page_title="Prediction"
-)
+    page_title="Prediction")
 
-#model_path ="../model&pipeline.bin"
 MODEL_PATH = "model&pipeline.bin"
 
 
