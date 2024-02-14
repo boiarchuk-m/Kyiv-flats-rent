@@ -1,9 +1,9 @@
 # Flats rent price prediction in Kyiv
 ## Table of contents
-- [Project description]()
-- [Technologies]()
-- [Repository files and directories]()
-- [Models performing]()
+- [Project description](https://github.com/boiarchuk-m/Kyiv-flats-rent/blob/main/README.md#problem-description)
+- [Technologies](https://github.com/boiarchuk-m/Kyiv-flats-rent/blob/main/README.md#technologies)
+- [Repository files and directories](https://github.com/boiarchuk-m/Kyiv-flats-rent/blob/main/README.md#repository-files-and-directories)
+- [Models performance](https://github.com/boiarchuk-m/Kyiv-flats-rent/blob/main/README.md#models-performance)
 
 ### Link to the Streamlit app: https://flats-rent-price-pred-d7ay5ycwta-uc.a.run.app/
 
@@ -27,7 +27,7 @@ This project was made for rent price prediction in Kyiv city. The data was scrap
 - `Dockerfile` a script to generate a docker container
 - `request_cloud.py` a Python script to send a request to the cloud service
 
-## Models performing
+## Models performance
 - Lasso Regression - R2 score = 0.743437
 - Ridge Regression - R2 score = 0.743419
 - DecisionTree Regression - R2 score = 0.861405
