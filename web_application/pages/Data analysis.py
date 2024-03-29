@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objs as go
 import json
 
-PATH_DATA = "../flats_cleaned.csv"
+PATH_DATA = "flats_cleaned.csv"
 
 @st.cache_data
 def load_data(path):

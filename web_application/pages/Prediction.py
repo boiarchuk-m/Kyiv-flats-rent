@@ -7,7 +7,7 @@ import numpy as np
 st.set_page_config(
     page_title="Prediction")
 
-MODEL_PATH = "../model&pipeline.bin"
+MODEL_PATH = "model&pipeline.bin"
 
 
 @st.cache_data
