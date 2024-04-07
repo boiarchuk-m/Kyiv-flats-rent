@@ -15,13 +15,14 @@ def load_data(path):
 df= load_data(PATH_DATA)
 
 
-st.markdown("###### Descriptive statistics")
-st.write(df.describe())
+st.markdown("#### Number of flats by district")
 
-pie_chart_dist = px.pie(df, title="Total number of flats by districts",
-                   names='district')
+pie_chart_dist = px.pie(df, names='district')
 
 st.plotly_chart(pie_chart_dist)
+
+st.write('In this dataset, about 25,2% of the apartments are placed in Pechersky district.'
+         ' The smallest percent of the flats are placed in Desnyanskiy district(3.78%)')
 
 category_mapping = {
     0 : 'No',
@@ -30,15 +31,41 @@ category_mapping = {
 
 df['metro_text'] = df['metro'].map(category_mapping)
 
-pie_chart_metro = px.pie(df, title="Total number of flats by metro",
-                   names='metro_text')
+st.markdown("#### Number of flats that are placed near the metro and no")
+
+pie_chart_metro = px.pie(df, names='metro_text')
 
 st.plotly_chart(pie_chart_metro)
+st.write('About 40 percent of the flats from this dataset are placed near the metro')
 
-pie_chart_rooms = px.pie(df, title="Total number of flats by number of rooms",
-                   names='rooms')
+st.markdown("#### Number of flats by rooms number")
+pie_chart_rooms = px.pie(df, names='rooms')
 
 st.plotly_chart(pie_chart_rooms)
+st.write('The most popular number of rooms in flats is 2. '
+         'Then goes flats with one room and with 3. Flats with 4 rooms take only 8 '
+         'percent from all sample, and flats with 5 and 6 are about 2.39 and 0.3 '
+         'respectively.')
+
+
+
+st.markdown("#### Prices")
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric("Max price", df.price.max())
+col2.metric("Min price", df.price.min())
+col3.metric("Average price", round(df.price.mean(), 2))
+col4.metric("Median price", df.price.median())
+
+histogram = px.histogram(df, x='price', nbins=50, title='Histogram of the prices')
+
+st.plotly_chart(histogram)
+
+st.write('The Distribution of prices is very right-skewed, so there is a big difference between '
+         'average and median values.')
+
+st.markdown("#### Median price by districts")
 
 df_grouped = df.groupby(['district'])['price'].median().reset_index().sort_values('price', ascending=False)
 
@@ -48,7 +75,7 @@ df_grouped.district = df_grouped.district.apply(lambda x : x + ' район')
 
 
 bar_chart = px.bar(data_frame=df_grouped,
-                   x='district', y='price', title="Median price by districts")
+                   x='district', y='price')
 
 st.plotly_chart(bar_chart)
 
@@ -67,14 +94,20 @@ fig_map = px.choropleth_mapbox(df_grouped, geojson=kyiv_districts_geojson,
 fig_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.plotly_chart(fig_map)
 
+st.write('Pechersky district has the highest median price and the smallest has Desnyanskiy')
 
+st.markdown("#### Correlation")
 
-st.markdown("###### Histogram of the prices")
+corr_matrix = df.corr(numeric_only=True).round(2)
 
+heatmap = px.imshow(corr_matrix, text_auto=True, title='Correlation matrix')
 
-histogram = px.histogram(df, x='price', nbins=50)
+st.plotly_chart(heatmap)
 
-st.plotly_chart(histogram)
+st.write('Between numeric features area of the flat is the most correlated feature '
+         'with price. Also, some other features with high correlation '
+         'coefficients like rooms or kitchen areas depend on the total area.')
+
 
 districts = df.district.unique()
 
@@ -93,17 +126,13 @@ fig.update_layout(title_text="Flats price VS Area", autosize=False, width=900,  
 st.plotly_chart(fig)
 
 
-st.markdown("###### Price by rooms")
+st.markdown("#### Price for flats placed near metro and no")
+
+df_metro = df.groupby(by='metro').price.median().reset_index()
+bar_chart_metro = px.bar(data_frame=df_metro, x='metro', y='price')
+
+st.plotly_chart(bar_chart_metro)
 
 
-box_plot = px.box(data_frame=df, x='rooms', y='price')
-
-st.plotly_chart(box_plot)
-
-corr_matrix = df.corr(numeric_only=True).round(2)
-
-heatmap = px.imshow(corr_matrix, text_auto=True, title="Correlation matrix")
-
-st.plotly_chart(heatmap)
 
 
