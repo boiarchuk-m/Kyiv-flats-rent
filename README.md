@@ -12,7 +12,7 @@ This project was made for rent price analysis and prediction in Kyiv city. The d
 
 ## Technologies:
 - Python libraries: Numpy, Pandas, Matplotlib, Seaborn, Scikit-learn, Plotly
-- Deployment: Streamlit, Docker
+- Deployment: Streamlit
 - Version control: Git, Github
  
 
